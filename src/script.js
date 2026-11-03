@@ -116,3 +116,31 @@ groupes.forEach(function (groupe) {
 
 const tri = document.getElementById("tri");
 
+function filtrer() {
+    const texte = recherche.value.toLowerCase().trim();
+    const groupeChoisi = filterGroup.value;
+
+    const elevesFiltrer = eleves.filter(function (eleve) {
+
+        if (
+            eleve.prenom.toLowerCase().includes(texte) ||
+            eleve.nom.toLowerCase().includes(texte)
+        ) {
+            if (groupeChoisi === "" || eleve.groupeId === Number(groupeChoisi)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+    });
+
+
+
+    afficherEleves(elevesFiltrer);
+}
+
+recherche.addEventListener("input", filtrer);
+filterGroup.addEventListener("change", filtrer);
