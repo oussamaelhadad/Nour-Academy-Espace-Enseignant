@@ -111,6 +111,7 @@ groupes.forEach(function (groupe) {
 
     filterGroup.appendChild(option);
 
+
 });
 
 
@@ -123,11 +124,9 @@ function filtrer() {
     
     const elevesFiltrer = eleves.filter(function (eleve) {
 
-        if (
-            eleve.prenom.toLowerCase().includes(texte) || eleve.nom.toLowerCase().includes(texte)
-        ) {
+        if ( eleve.prenom.toLowerCase().includes(texte) || eleve.nom.toLowerCase().includes(texte)) {
             if (groupeChoisi === "" || eleve.groupeId === Number(groupeChoisi)) {
-                return true;
+                return true; 
             } 
             else { return false;
             }
@@ -138,8 +137,23 @@ function filtrer() {
     });
 
 
+    const choixTri = tri.value;
+
+    if (choixTri === "nom") {
+    elevesFiltrer.sort(function (a, b) {
+        return a.nom.localeCompare(b.nom);
+    });
+    }
+    else if (choixTri === "moyenne") {
+    elevesFiltrer.sort(function (a, b) {
+        return calculerMoyenne(b.notes) - calculerMoyenne(a.notes);
+    });
+    }
+
+
     afficherEleves(elevesFiltrer);
 }
 
 recherche.addEventListener("input", filtrer);
 filterGroup.addEventListener("change", filtrer);
+tri.addEventListener("change", filtrer);
