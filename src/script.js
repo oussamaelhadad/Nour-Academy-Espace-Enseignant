@@ -201,7 +201,8 @@ liste.addEventListener("click", function (event) {
 
         eleve.absences++;
 
-    } else if (bouton.dataset.action === "note") {
+    } 
+    else if (bouton.dataset.action === "note") {
 
         const noteV = prompt("Entrez la note de l'élève :");
 
@@ -221,5 +222,148 @@ liste.addEventListener("click", function (event) {
 
     const nouvelleLigne = creerLigne(eleve);
     ancienneLigne.replaceWith(nouvelleLigne);
+
+});
+
+const prenom = document.getElementById("prenom");
+const prenomMsg = document.getElementById("prenom-msg");
+const regexPrenom = /^[A-Za-z]{2,}$/
+
+prenom.addEventListener("input", function () {
+
+    const resultat = regexPrenom.test(prenom.value);
+
+    if (resultat) { prenomMsg.textContent = "Prénom valide !";
+                    prenomMsg.classList.remove("text-alert");
+                 prenomMsg.classList.add("text-ok");
+
+        prenom.classList.remove("border-red-500");
+        prenom.classList.add("border-green-500");
+
+    } 
+    else {
+
+        prenomMsg.textContent = "Minimum 2 caractères, lettres uniquement.";
+        prenomMsg.classList.remove("text-ok");
+        prenomMsg.classList.add("text-alert");
+
+        prenom.classList.remove("border-green-500");
+        prenom.classList.add("border-red-500");
+
+    }
+
+});
+
+
+const nom = document.getElementById("nom");
+const nomMsg = document.getElementById("nom-msg");
+const regexnom = /^[A-Za-z]{2,}$/
+
+nom.addEventListener("input", function () {
+
+    const resultat = regexnom.test(nom.value);
+
+    if (resultat) { nomMsg.textContent = "nom valide !";
+                    nomMsg.classList.remove("text-alert");
+                    nomMsg.classList.add("text-ok");
+
+        nom.classList.remove("border-red-500");
+        nom.classList.add("border-green-500");
+
+    } 
+    else {
+
+        nomMsg.textContent = "Minimum 2 caractères, lettres uniquement.";
+        nomMsg.classList.remove("text-ok");
+        nomMsg.classList.add("text-alert");
+
+        nom.classList.remove("border-green-500");
+        nom.classList.add("border-red-500");
+
+    }
+
+});
+
+const email = document.getElementById("email");
+const emailMsg = document.getElementById("email-msg");
+const regexEmail = /^[a-zA-C0-9._%+-]+@[a-zA-C0-9.-]+\.[a-zA-Z]{2,}$/;
+email.addEventListener("input", function (){
+
+    const resultat = regexEmail.test(email.value);
+
+    if (resultat) {
+
+        emailMsg.textContent = "Email valide !";
+        emailMsg.classList.remove("text-alert");
+        emailMsg.classList.add("text-ok");
+
+        email.classList.remove("border-red-500");
+        email.classList.add("border-green-500");
+
+    } 
+    else {
+
+        emailMsg.textContent = "Veuillez entrer un email valide.";
+        emailMsg.classList.remove("text-ok");
+        emailMsg.classList.add("text-alert");
+
+        email.classList.remove("border-green-500");
+        email.classList.add("border-red-500");
+
+    }
+
+});
+
+const telephone = document.getElementById("telephone");
+const telephoneMsg = document.getElementById("telephone-msg");
+const regexTelephone = /^(?:\+212|00212|0)[5-7]\d{8}$/;
+
+telephone.addEventListener("input", function () {
+
+    const resultat = regexTelephone.test(telephone.value);
+
+    if (resultat) {
+
+        telephoneMsg.textContent = "Téléphone valide !";
+        telephoneMsg.classList.remove("text-alert");
+        telephoneMsg.classList.add("text-ok");
+
+        telephone.classList.remove("border-red-500");
+        telephone.classList.add("border-green-500");
+
+    } 
+    else { telephoneMsg.textContent = "Numéro invalide. Exemple : 0612345678";
+           telephoneMsg.classList.remove("text-ok");
+           telephoneMsg.classList.add("text-alert");
+
+           telephone.classList.remove("border-green-500");
+           telephone.classList.add("border-red-500");
+    }
+
+});
+
+const code = document.getElementById("code");
+const codeMsg = document.getElementById("code-msg");
+const codeForce = document.getElementById("code-force");
+const regexCode = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+
+code.addEventListener("input", function () {
+
+    let force = 0;
+
+    if (code.value.length >= 8) {
+        force++;
+    }
+
+    if (/[A-Z]/.test(code.value)) {
+        force++;
+    }
+
+    if (/[0-9]/.test(code.value)) {
+        force++;
+    }
+
+    codeForce.value = force;
 
 });
